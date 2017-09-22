@@ -1,7 +1,11 @@
 Zcash Contributors
 ==================
 
+<<<<<<< HEAD
 Jack Grigg (443)
+=======
+Jack Grigg (445)
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 Simon Liu (269)
 Sean Bowe (188)
 Daira Hopwood (102)

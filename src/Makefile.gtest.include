@@ -9,8 +9,12 @@ zcash_gtest_SOURCES = \
 	gtest/utils.cpp \
 	gtest/test_checktransaction.cpp \
 	gtest/json_test_vectors.cpp \
+<<<<<<< HEAD
 	gtest/json_test_vectors.h \
 	gtest/test_foundersreward.cpp
+=======
+	gtest/json_test_vectors.h
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 # These tests are order-dependent, because they
 # depend on global state (see #1539)
 if ENABLE_WALLET
@@ -27,7 +31,11 @@ zcash_gtest_SOURCES += \
 	gtest/test_noteencryption.cpp \
 	gtest/test_mempool.cpp \
 	gtest/test_merkletree.cpp \
+<<<<<<< HEAD
 	gtest/test_metrics.cpp \
+=======
+	#gtest/test_metrics.cpp \
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 	gtest/test_miner.cpp \
 	gtest/test_pow.cpp \
 	gtest/test_random.cpp \

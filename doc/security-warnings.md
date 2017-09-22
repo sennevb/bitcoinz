@@ -8,7 +8,11 @@ Zcash has been subjected to a formal third-party security review. For security
 announcements, audit results and other general security information, see
 https://z.cash/support/security.html
 
+<<<<<<< HEAD
 x86-64 Linux Only
+=======
+x86-64 Only
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 -----------------------
 
 There are [known bugs](https://github.com/scipr-lab/libsnark/issues/26) which

@@ -295,6 +295,7 @@ static const CRPCCommand vRPCCommands[] =
     { "blockchain",         "verifychain",            &verifychain,            true  },
     { "blockchain",         "getspentinfo",           &getspentinfo,           false },
 
+
     /* Mining */
     { "mining",             "getblocktemplate",       &getblocktemplate,       true  },
     { "mining",             "getmininginfo",          &getmininginfo,          true  },
@@ -323,12 +324,14 @@ static const CRPCCommand vRPCCommands[] =
     { "rawtransactions",    "fundrawtransaction",     &fundrawtransaction,     false },
 #endif
 
+
     /* Address index */
     { "addressindex",       "getaddressmempool",      &getaddressmempool,      true  },
     { "addressindex",       "getaddressutxos",        &getaddressutxos,        false },
     { "addressindex",       "getaddressdeltas",       &getaddressdeltas,       false },
     { "addressindex",       "getaddresstxids",        &getaddresstxids,        false },
     { "addressindex",       "getaddressbalance",      &getaddressbalance,      false },
+
 
     /* Utility functions */
     { "util",               "createmultisig",         &createmultisig,         true  },
@@ -595,7 +598,8 @@ std::string HelpExampleCli(const std::string& methodname, const std::string& arg
 std::string HelpExampleRpc(const std::string& methodname, const std::string& args)
 {
     return "> curl --user myusername --data-binary '{\"jsonrpc\": \"1.0\", \"id\":\"curltest\", "
-        "\"method\": \"" + methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:8232/\n";
+        "\"method\": \"" + methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:8032/\n";
+
 }
 
 void RPCRegisterTimerInterface(RPCTimerInterface *iface)

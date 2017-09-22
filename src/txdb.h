@@ -64,7 +64,7 @@ public:
 class CBlockTreeDB : public CLevelDBWrapper
 {
 public:
-    CBlockTreeDB(size_t nCacheSize, bool fMemory = false, bool fWipe = false, bool compression = true, int maxOpenFiles = 1000);
+    CBlockTreeDB(size_t nCacheSize, bool fMemory = false, bool fWipe = false);
 private:
     CBlockTreeDB(const CBlockTreeDB&);
     void operator=(const CBlockTreeDB&);

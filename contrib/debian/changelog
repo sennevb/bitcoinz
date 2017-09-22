@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+zcash (1.0.11) stable; urgency=medium
+
+  * 1.0.11 release.
+
+ -- Zcash Company <team@z.cash>  Tue, 15 Aug 2017 10:06:25 +0100
+
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 zcash (1.0.11~rc1) stable; urgency=medium
 
   * 1.0.11-rc1 release.

@@ -137,6 +137,7 @@ def addr_to_hex(addr):
     else:
         raise ValueError('Could not parse address %s' % addr)
     return binascii.hexlify(bytearray(addr))
+<<<<<<< HEAD
 
 def test_ipv6_local():
     '''
@@ -152,3 +153,5 @@ def test_ipv6_local():
     except socket.error:
         have_ipv6 = False
     return have_ipv6
+=======
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875

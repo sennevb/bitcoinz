@@ -10,8 +10,13 @@ Build-Depends: autoconf, automake, bsdmainutils, build-essential,
 Vcs-Git: https://github.com/zcash/zcash.git
 Vcs-Browser: https://github.com/zcash/zcash
 
+<<<<<<< HEAD
 Package: zcash
 Architecture: amd64
+=======
+Package: bitcoinz
+Version: 1.0.2
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 Depends: ${shlibs:Depends}
 Description: HTTPS for money.
  Based on Bitcoin's code, it intends to offer a far higher standard

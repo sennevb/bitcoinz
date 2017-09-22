@@ -3,7 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+
 #include "base58.h"
+#include "amount.h"
+#include "chain.h"
+#include "chainparams.h"
 #include "checkpoints.h"
 #include "consensus/validation.h"
 #include "main.h"
@@ -105,6 +109,7 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
         result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
     return result;
 }
+
 
 UniValue blockToDeltasJSON(const CBlock& block, const CBlockIndex* blockindex)
 {
@@ -211,6 +216,7 @@ UniValue blockToDeltasJSON(const CBlock& block, const CBlockIndex* blockindex)
         result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
     return result;
 }
+
 
 UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDetails = false)
 {
@@ -371,7 +377,7 @@ UniValue getrawmempool(const UniValue& params, bool fHelp)
             "{                           (json object)\n"
             "  \"transactionid\" : {       (json object)\n"
             "    \"size\" : n,             (numeric) transaction size in bytes\n"
-            "    \"fee\" : n,              (numeric) transaction fee in bitcoins\n"
+            "    \"fee\" : n,              (numeric) transaction fee in " + CURRENCY_UNIT + "\n"
             "    \"time\" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT\n"
             "    \"height\" : n,           (numeric) block height when transaction entered pool\n"
             "    \"startingpriority\" : n, (numeric) priority when transaction entered pool\n"
@@ -490,6 +496,7 @@ UniValue getblockhashes(const UniValue& params, bool fHelp)
 
     return result;
 }
+
 
 UniValue getblockhash(const UniValue& params, bool fHelp)
 {
@@ -717,7 +724,7 @@ UniValue gettxout(const UniValue& params, bool fHelp)
             "{\n"
             "  \"bestblock\" : \"hash\",    (string) the block hash\n"
             "  \"confirmations\" : n,       (numeric) The number of confirmations\n"
-            "  \"value\" : x.xxx,           (numeric) The transaction value in btc\n"
+            "  \"value\" : x.xxx,           (numeric) The transaction value in " + CURRENCY_UNIT + "\n"
             "  \"scriptPubKey\" : {         (json object)\n"
             "     \"asm\" : \"code\",       (string) \n"
             "     \"hex\" : \"hex\",        (string) \n"

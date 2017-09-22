@@ -113,6 +113,7 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
     return true;
 }
 
+
 void CTxMemPool::addAddressIndex(const CTxMemPoolEntry &entry, const CCoinsViewCache &view)
 {
     LOCK(cs);
@@ -252,6 +253,7 @@ bool CTxMemPool::removeSpentIndex(const uint256 txhash)
     return true;
 }
 
+
 void CTxMemPool::remove(const CTransaction &origTx, std::list<CTransaction>& removed, bool fRecursive)
 {
     // Remove transaction from memory pool
@@ -302,6 +304,7 @@ void CTxMemPool::remove(const CTransaction &origTx, std::list<CTransaction>& rem
             minerPolicyEstimator->removeTx(hash);
             removeAddressIndex(hash);
             removeSpentIndex(hash);
+
         }
     }
 }

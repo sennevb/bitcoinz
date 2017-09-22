@@ -469,6 +469,7 @@ wallet_utility_LDADD = \
   $(LIBZCASH_LIBS)
 endif
 
+
 #
 
 # zcash-tx binary #

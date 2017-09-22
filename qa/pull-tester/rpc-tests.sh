@@ -36,9 +36,12 @@ testScripts=(
     'walletbackup.py'
     'nodehandling.py'
     'reindex.py'
+<<<<<<< HEAD
     'addressindex.py'
     'timestampindex.py'
     'spentindex.py'
+=======
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
     'decodescript.py'
     'disablewallet.py'
     'zcjoinsplit.py'

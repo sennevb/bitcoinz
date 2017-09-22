@@ -62,9 +62,8 @@ UniValue TxJoinSplitToJSON(const CTransaction& tx) {
         UniValue joinsplit(UniValue::VOBJ);
 
         joinsplit.push_back(Pair("vpub_old", ValueFromAmount(jsdescription.vpub_old)));
-        joinsplit.push_back(Pair("vpub_oldZat", jsdescription.vpub_old));
         joinsplit.push_back(Pair("vpub_new", ValueFromAmount(jsdescription.vpub_new)));
-        joinsplit.push_back(Pair("vpub_newZat", jsdescription.vpub_new));
+
 
         joinsplit.push_back(Pair("anchor", jsdescription.anchor.GetHex()));
 
@@ -112,6 +111,7 @@ UniValue TxJoinSplitToJSON(const CTransaction& tx) {
     return vjoinsplit;
 }
 
+
 void TxToJSONExpanded(const CTransaction& tx, const uint256 hashBlock, UniValue& entry,
                       int nHeight = 0, int nConfirmations = 0, int nBlockTime = 0)
 {
@@ -133,6 +133,7 @@ void TxToJSONExpanded(const CTransaction& tx, const uint256 hashBlock, UniValue&
             o.push_back(Pair("hex", HexStr(txin.scriptSig.begin(), txin.scriptSig.end())));
             in.push_back(Pair("scriptSig", o));
 
+
             // Add address and value info if spentindex enabled
             CSpentIndexValue spentInfo;
             CSpentIndexKey spentKey(txin.prevout.hash, txin.prevout.n);
@@ -146,6 +147,7 @@ void TxToJSONExpanded(const CTransaction& tx, const uint256 hashBlock, UniValue&
                 }
             }
 
+
         }
         in.push_back(Pair("sequence", (int64_t)txin.nSequence));
         vin.push_back(in);
@@ -156,11 +158,13 @@ void TxToJSONExpanded(const CTransaction& tx, const uint256 hashBlock, UniValue&
         const CTxOut& txout = tx.vout[i];
         UniValue out(UniValue::VOBJ);
         out.push_back(Pair("value", ValueFromAmount(txout.nValue)));
-        out.push_back(Pair("valueSat", txout.nValue));
+
+        out.push_back(Pair("valueZat", txout.nValue));
         out.push_back(Pair("n", (int64_t)i));
         UniValue o(UniValue::VOBJ);
         ScriptPubKeyToJSON(txout.scriptPubKey, o, true);
         out.push_back(Pair("scriptPubKey", o));
+
 
         // Add spent information if spentindex is enabled
         CSpentIndexValue spentInfo;
@@ -171,6 +175,7 @@ void TxToJSONExpanded(const CTransaction& tx, const uint256 hashBlock, UniValue&
             out.push_back(Pair("spentHeight", spentInfo.blockHeight));
         }
 
+
         vout.push_back(out);
     }
     entry.push_back(Pair("vout", vout));
@@ -180,6 +185,7 @@ void TxToJSONExpanded(const CTransaction& tx, const uint256 hashBlock, UniValue&
 
     if (!hashBlock.IsNull()) {
         entry.push_back(Pair("blockhash", hashBlock.GetHex()));
+
 
         if (nConfirmations > 0) {
             entry.push_back(Pair("height", nHeight));
@@ -237,6 +243,7 @@ void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
 
     if (!hashBlock.IsNull()) {
         entry.push_back(Pair("blockhash", hashBlock.GetHex()));
+
         BlockMap::iterator mi = mapBlockIndex.find(hashBlock);
         if (mi != mapBlockIndex.end() && (*mi).second) {
             CBlockIndex* pindex = (*mi).second;
@@ -292,7 +299,7 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"vout\" : [              (array of json objects)\n"
             "     {\n"
-            "       \"value\" : x.xxx,            (numeric) The value in btc\n"
+            "       \"value\" : x.xxx,            (numeric) The value in " + CURRENCY_UNIT + "\n"
             "       \"n\" : n,                    (numeric) index\n"
             "       \"scriptPubKey\" : {          (json object)\n"
             "         \"asm\" : \"asm\",          (string) the asm\n"
@@ -309,8 +316,8 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"vjoinsplit\" : [        (array of json objects, only for version >= 2)\n"
             "     {\n"
-            "       \"vpub_old\" : x.xxx,         (numeric) public input value in ZEC\n"
-            "       \"vpub_new\" : x.xxx,         (numeric) public output value in ZEC\n"
+            "       \"vpub_old\" : x.xxx,         (numeric) public input value in " + CURRENCY_UNIT + "\n"
+            "       \"vpub_new\" : x.xxx,         (numeric) public output value in " + CURRENCY_UNIT + "\n"
             "       \"anchor\" : \"hex\",         (string) the anchor\n"
             "       \"nullifiers\" : [            (json array of string)\n"
             "         \"hex\"                     (string) input note nullifier\n"
@@ -346,6 +353,8 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
             + HelpExampleRpc("getrawtransaction", "\"mytxid\", 1")
         );
 
+    LOCK(cs_main);
+
     uint256 hash = ParseHashV(params[0], "parameter 1");
 
     bool fVerbose = false;
@@ -379,6 +388,7 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
         }
     }
 
+
     string strHex = EncodeHexTx(tx);
 
     if (!fVerbose)
@@ -386,6 +396,7 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
 
     UniValue result(UniValue::VOBJ);
     result.push_back(Pair("hex", strHex));
+
     TxToJSONExpanded(tx, hashBlock, result, nHeight, nConfirmations, nBlockTime);
 
     return result;
@@ -526,7 +537,7 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
             "     ]\n"
             "2. \"addresses\"           (string, required) a json object with addresses as keys and amounts as values\n"
             "    {\n"
-            "      \"address\": x.xxx   (numeric, required) The key is the bitcoin address, the value is the btc amount\n"
+            "      \"address\": x.xxx   (numeric, required) The key is the bitcoin address, the value is the " + CURRENCY_UNIT + " amount\n"
             "      ,...\n"
             "    }\n"
 
@@ -613,7 +624,7 @@ UniValue decoderawtransaction(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"vout\" : [             (array of json objects)\n"
             "     {\n"
-            "       \"value\" : x.xxx,            (numeric) The value in btc\n"
+            "       \"value\" : x.xxx,            (numeric) The value in " + CURRENCY_UNIT + "\n"
             "       \"n\" : n,                    (numeric) index\n"
             "       \"scriptPubKey\" : {          (json object)\n"
             "         \"asm\" : \"asm\",          (string) the asm\n"
@@ -630,8 +641,8 @@ UniValue decoderawtransaction(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"vjoinsplit\" : [        (array of json objects, only for version >= 2)\n"
             "     {\n"
-            "       \"vpub_old\" : x.xxx,         (numeric) public input value in ZEC\n"
-            "       \"vpub_new\" : x.xxx,         (numeric) public output value in ZEC\n"
+            "       \"vpub_old\" : x.xxx,         (numeric) public input value in " + CURRENCY_UNIT + "\n"
+            "       \"vpub_new\" : x.xxx,         (numeric) public output value in " + CURRENCY_UNIT + "\n"
             "       \"anchor\" : \"hex\",         (string) the anchor\n"
             "       \"nullifiers\" : [            (json array of string)\n"
             "         \"hex\"                     (string) input note nullifier\n"

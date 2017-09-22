@@ -2,7 +2,11 @@
 
 set -eu
 
-PARAMS_DIR="$HOME/.zcash-params"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    PARAMS_DIR="$HOME/Library/Application Support/ZcashParams"
+else
+    PARAMS_DIR="$HOME/.zcash-params"
+fi
 
 SPROUT_PKEY_NAME='sprout-proving.key'
 SPROUT_VKEY_NAME='sprout-verifying.key'
@@ -18,15 +22,21 @@ function fetch_params {
     local dlname="${output}.dl"
     local expectedhash="$3"
 
-    if ! [ -f "$output" ]
-    then
+    if ! [ -f "$output" ]; then
         echo "Retrieving: $url"
-        wget \
-            --progress=dot:giga \
-            --output-document="$dlname" \
-            --continue \
-            --retry-connrefused --waitretry=3 --timeout=30 \
-            "$url"
+        if [[ $(sw_vers -productName) == "Mac OS X" ]]; then
+            curl \
+                --output "$dlname" \
+                -# -L -C - \
+                "$url"
+        else
+            wget \
+                --progress=dot:giga \
+                --output-document="$dlname" \
+                --continue \
+                --retry-connrefused --waitretry=3 --timeout=30 \
+                "$url"
+        fi
 
         "$SHA256CMD" $SHA256ARGS -c <<EOF
 $expectedhash  $dlname
@@ -56,7 +66,7 @@ function lock() {
 
 function exit_locked_error {
     echo "Only one instance of fetch-params.sh can be run at a time." >&2
-    exit 1
+    #exit 1
 }
 
 function main() {

@@ -179,6 +179,7 @@ extern UniValue getaddressdeltas(const UniValue& params, bool fHelp);
 extern UniValue getaddresstxids(const UniValue& params, bool fHelp);
 extern UniValue getaddressbalance(const UniValue& params, bool fHelp);
 
+
 extern UniValue getpeerinfo(const UniValue& params, bool fHelp);
 extern UniValue ping(const UniValue& params, bool fHelp);
 extern UniValue addnode(const UniValue& params, bool fHelp);
@@ -271,8 +272,11 @@ extern UniValue getdifficulty(const UniValue& params, bool fHelp);
 extern UniValue settxfee(const UniValue& params, bool fHelp);
 extern UniValue getmempoolinfo(const UniValue& params, bool fHelp);
 extern UniValue getrawmempool(const UniValue& params, bool fHelp);
+<<<<<<< HEAD
 extern UniValue getblockhashes(const UniValue& params, bool fHelp);
 extern UniValue getblockdeltas(const UniValue& params, bool fHelp);
+=======
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 extern UniValue getblockhash(const UniValue& params, bool fHelp);
 extern UniValue getblockheader(const UniValue& params, bool fHelp);
 extern UniValue getblock(const UniValue& params, bool fHelp);

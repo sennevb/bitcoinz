@@ -2,6 +2,11 @@ Release Process
 ====================
 Meta: There should always be a single release engineer to disambiguate responsibility.
 
+<<<<<<< HEAD
+=======
+If this is a hotfix release, please see `./hotfix-process.md` before proceeding.
+
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 ## Pre-release
 
 ### Github Milestone
@@ -38,8 +43,28 @@ process. If these were not anticipated correctly, this could block the
 release, so if you suspect this is necessary, double check with the
 whole engineering team.
 
+<<<<<<< HEAD
 ## Release process
 
+=======
+## Release dependencies
+
+The release script has the following dependencies:
+
+- `help2man`
+- `debchange` (part of the devscripts Debian package)
+
+You can optionally install the `progressbar2` Python module with pip to have a
+progress bar displayed during the build process.
+
+## Release process
+
+In the commands below, <RELEASE> and <RELEASE_PREV> are prefixed with a v, ie.
+v1.0.9 (not 1.0.9).
+
+### Create the release branch
+
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 Run the release script, which will verify you are on the latest clean
 checkout of master, create a branch, then commit standard automated
 changes to that branch locally:
@@ -91,6 +116,25 @@ signed. **CAUTION:** Remember the `v` at the beginning here:
 - If all is well, the DevOps engineer will build the Debian packages and update the
   [apt.z.cash package repository](https://apt.z.cash).
 
+<<<<<<< HEAD
+=======
+## Add release notes to GitHub
+
+- Go to the [GitHub tags page](https://github.com/zcash/zcash/tags).
+- Click "Add release notes" beside the tag for this release.
+- Copy the release blog post into the release description, and edit to suit
+  publication on GitHub. See previous release notes for examples.
+- Click "Publish release" if publishing the release blog post now, or
+  "Save draft" to store the notes internally (and then return later to publish
+  once the blog post is up).
+
+Note that some GitHub releases are marked as "Verified", and others as
+"Unverified". This is related to the GPG signature on the release tag - in
+particular, GitHub needs the corresponding public key to be uploaded to a
+corresponding GitHub account. If this release is marked as "Unverified", click
+the marking to see what GitHub wants to be done.
+
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 ## Post Release Task List
 
 ### Deploy testnet
@@ -106,6 +150,14 @@ Then, verify that nodes can connect to the testnet server, and update the guide 
 
 ### Update the 1.0 User Guide
 
+<<<<<<< HEAD
 ### Publish the release announcement (blog, zcash-dev, slack)
+=======
+This also means updating [the translations](https://github.com/zcash/zcash-docs).
+Coordinate with the translation team for now. Suggestions for improving this
+part of the process should be added to #2596.
+
+### Publish the release announcement (blog, github, zcash-dev, slack)
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
 
 ## Celebrate

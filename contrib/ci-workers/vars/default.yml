@@ -39,3 +39,9 @@ buildbot_modules:
 rpc_test_modules:
   - pyblake2
   - pyzmq
+<<<<<<< HEAD
+=======
+
+# Environment variables
+pip_bin_dir: /usr/local/bin
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875

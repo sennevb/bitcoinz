@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ITH4Coinomia (2):
       Update security-warnings.md
       Update init.cpp
@@ -14,3 +15,7 @@ Simon (4):
       Add GenIdentity, an identity function for MappedShuffle.
       Add transaction size and zaddr output limit checks to z_sendmany.
 
+=======
+BitcoinZ Team:
+      Rebranding
+>>>>>>> f0a9a0868276e6a96a50d846ed4ebbd378cda875
